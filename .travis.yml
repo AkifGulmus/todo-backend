@@ -1,0 +1,15 @@
+language: go
+
+go:
+  - "1.15.x"
+
+services:
+  - docker
+
+script: cd tests/integration && go test . && cd ../..
+
+deploy:
+  - provider: script
+    script: bash deploy-backend.sh
+    on:
+      all_branches: true
