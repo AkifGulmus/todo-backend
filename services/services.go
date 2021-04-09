@@ -1,6 +1,8 @@
 package services
 
 import (
+	"fmt"
+
 	"github.com/google/uuid"
 )
 
@@ -21,14 +23,14 @@ func GetTodos() []Todo {
 	return todosList
 }
 
-func CreateTodo(todo_text string) Todo {
+func CreateTodo(todo_text string) {
+	fmt.Println("NEVAR NE")
 	todoID := uuid.New().String()
 	Todos[todoID] = Todo{
 		TodoID: todoID,
 		Text:   todo_text,
 		Done:   false,
 	}
-	return Todos[todoID]
 }
 
 func UpdateTodo(todoID string) {

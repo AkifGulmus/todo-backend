@@ -33,7 +33,8 @@ func SetupRoutes(app *fiber.App) {
 				return c.Status(fiber.StatusBadRequest).Send(nil)
 			}
 		}
-		return c.Status(fiber.StatusAccepted).JSON(services.CreateTodo(body.Text))
+		services.CreateTodo(body.Text)
+		return c.Status(fiber.StatusAccepted).Send(nil)
 	})
 
 	app.Patch("/todo-items/:todoid", func(c *fiber.Ctx) error {
