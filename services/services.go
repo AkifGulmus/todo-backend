@@ -1,35 +1,43 @@
 package services
 
 import (
-	"fmt"
+	"sort"
+	"time"
 
 	"github.com/google/uuid"
 )
 
 type Todo struct {
-	TodoID string `json:"todoID"`
-	Text   string `json:"text"`
-	Done   bool   `json:"done"`
+	createdDate int64
+	TodoID      string `json:"todoID"`
+	Text        string `json:"text"`
+	Done        bool   `json:"done"`
 }
 
 var Todos = make(map[string]Todo)
 
+type byCreatedDate []Todo
+
+func (a byCreatedDate) Len() int           { return len(a) }
+func (a byCreatedDate) Less(i, j int) bool { return a[i].createdDate < a[j].createdDate }
+func (a byCreatedDate) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+
 func GetTodos() []Todo {
 	var todosList = []Todo{}
 	for _, value := range Todos {
-		todoItem := Todo{TodoID: value.TodoID, Text: value.Text, Done: value.Done}
-		todosList = append(todosList, todoItem)
+		todosList = append(todosList, Todo{createdDate: value.createdDate, TodoID: value.TodoID, Text: value.Text, Done: value.Done})
 	}
+	sort.Sort(byCreatedDate(todosList))
 	return todosList
 }
 
 func CreateTodo(todo_text string) {
-	fmt.Println("NEVAR NE")
 	todoID := uuid.New().String()
 	Todos[todoID] = Todo{
-		TodoID: todoID,
-		Text:   todo_text,
-		Done:   false,
+		createdDate: time.Now().Unix(),
+		TodoID:      todoID,
+		Text:        todo_text,
+		Done:        false,
 	}
 }
 
