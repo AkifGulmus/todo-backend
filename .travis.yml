@@ -6,7 +6,7 @@ go:
 services:
   - docker
 
-script: cd tests/integration && go test . && cd ../..
+script: go test .
 
 deploy:
   - provider: script

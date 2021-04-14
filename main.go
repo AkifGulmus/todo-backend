@@ -1,7 +1,6 @@
 package main
 
 import (
-	router "go-backend/routes"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -12,7 +11,7 @@ func main() {
 	app := fiber.New()
 	app.Use(cors.New())
 
-	router.SetupRoutes(app)
+	SetupRoutes(app)
 
 	log.Fatal(app.Listen(":5000"))
 }

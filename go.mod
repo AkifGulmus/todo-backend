@@ -5,8 +5,6 @@ go 1.15
 require (
 	github.com/gofiber/fiber/v2 v2.7.1
 	github.com/google/uuid v1.2.0
-	github.com/hashicorp/go-version v1.2.1 // indirect
-	github.com/hashicorp/logutils v1.0.0 // indirect
 	github.com/joho/godotenv v1.3.0
 	github.com/klauspost/compress v1.11.13 // indirect
 	github.com/kr/text v0.2.0 // indirect
